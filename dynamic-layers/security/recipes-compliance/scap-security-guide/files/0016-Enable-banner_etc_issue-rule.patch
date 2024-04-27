@@ -1,0 +1,25 @@
+From 5b5f9f845502393b76aa43b6e740319f5cdaee9d Mon Sep 17 00:00:00 2001
+From: Yi Zhao <yi.zhao@windriver.com>
+Date: Wed, 22 May 2024 22:48:05 +0800
+Subject: [PATCH] Enable banner_etc_issue rule
+
+Upstream-Status: Inappropriate [WRLinux specific]
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ .../accounts/accounts-banners/banner_etc_issue/bash/shared.sh   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/linux_os/guide/system/accounts/accounts-banners/banner_etc_issue/bash/shared.sh b/linux_os/guide/system/accounts/accounts-banners/banner_etc_issue/bash/shared.sh
+index 63ceaaf88f..7124d20c70 100644
+--- a/linux_os/guide/system/accounts/accounts-banners/banner_etc_issue/bash/shared.sh
++++ b/linux_os/guide/system/accounts/accounts-banners/banner_etc_issue/bash/shared.sh
+@@ -1,4 +1,4 @@
+-# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv,multi_platform_sle,multi_platform_ubuntu
++# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv,multi_platform_sle,multi_platform_ubuntu,multi_platform_wrlinux
+ 
+ {{{ bash_instantiate_variables("login_banner_text") }}}
+ 
+-- 
+2.25.1
+

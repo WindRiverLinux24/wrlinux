@@ -1,0 +1,25 @@
+From 3c5585f4c1bf2cf9c6943d3ff82b045e9040d41f Mon Sep 17 00:00:00 2001
+From: Yi Zhao <yi.zhao@windriver.com>
+Date: Fri, 24 May 2024 14:51:22 +0800
+Subject: [PATCH] Enable accounts_max_concurrent_login_sessions rule
+
+Upstream-Status: Inappropriate [WRLinux specific]
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ .../accounts_max_concurrent_login_sessions/bash/shared.sh       | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/linux_os/guide/system/accounts/accounts-session/accounts_max_concurrent_login_sessions/bash/shared.sh b/linux_os/guide/system/accounts/accounts-session/accounts_max_concurrent_login_sessions/bash/shared.sh
+index 0005b2ccba..7836cca865 100644
+--- a/linux_os/guide/system/accounts/accounts-session/accounts_max_concurrent_login_sessions/bash/shared.sh
++++ b/linux_os/guide/system/accounts/accounts-session/accounts_max_concurrent_login_sessions/bash/shared.sh
+@@ -1,4 +1,4 @@
+-# platform = Red Hat Virtualization 4,multi_platform_ol,multi_platform_rhel,multi_platform_ubuntu,multi_platform_sle
++# platform = Red Hat Virtualization 4,multi_platform_ol,multi_platform_rhel,multi_platform_ubuntu,multi_platform_sle,multi_platform_wrlinux
+ 
+ {{{ bash_instantiate_variables("var_accounts_max_concurrent_login_sessions") }}}
+ 
+-- 
+2.25.1
+

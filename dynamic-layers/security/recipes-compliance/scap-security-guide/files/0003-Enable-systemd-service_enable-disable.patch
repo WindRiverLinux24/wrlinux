@@ -1,0 +1,36 @@
+From 6a9dfd11d77218cab0a5fcdcaccc60a258ccc40d Mon Sep 17 00:00:00 2001
+From: Yi Zhao <yi.zhao@windriver.com>
+Date: Sun, 28 Apr 2024 14:34:11 +0800
+Subject: [PATCH] Enable systemd service_enable/disable
+
+Upstream-Status: Inappropriate [WRLinux specific]
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ shared/templates/service_disabled/bash.template | 2 +-
+ shared/templates/service_enabled/bash.template  | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/shared/templates/service_disabled/bash.template b/shared/templates/service_disabled/bash.template
+index c8b6826b2c..86f980fee0 100644
+--- a/shared/templates/service_disabled/bash.template
++++ b/shared/templates/service_disabled/bash.template
+@@ -1,4 +1,4 @@
+-# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv,multi_platform_sle,multi_platform_ubuntu
++# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv,multi_platform_sle,multi_platform_ubuntu,multi_platform_wrlinux
+ # reboot = false
+ # strategy = disable
+ # complexity = low
+diff --git a/shared/templates/service_enabled/bash.template b/shared/templates/service_enabled/bash.template
+index 00fd1ee2f4..00f6eff432 100644
+--- a/shared/templates/service_enabled/bash.template
++++ b/shared/templates/service_enabled/bash.template
+@@ -1,4 +1,4 @@
+-# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv,multi_platform_ubuntu,multi_platform_sle
++# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv,multi_platform_ubuntu,multi_platform_sle,multi_platform_wrlinux
+ # reboot = false
+ # strategy = enable
+ # complexity = low
+-- 
+2.25.1
+

@@ -1,0 +1,68 @@
+From 74501471f23b3b878a04d1bf86d3d5b962998a50 Mon Sep 17 00:00:00 2001
+From: Yi Zhao <yi.zhao@windriver.com>
+Date: Fri, 2 Sep 2022 10:04:57 +0800
+Subject: [PATCH] Enable display_login_attempts rule
+
+Upstream-Status: Inappropriate [WRLinux specific]
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ .../accounts-pam/display_login_attempts/bash/shared.sh      | 6 +++---
+ .../accounts-pam/display_login_attempts/oval/shared.xml     | 2 +-
+ .../accounts/accounts-pam/display_login_attempts/rule.yml   | 4 ++--
+ 3 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/linux_os/guide/system/accounts/accounts-pam/display_login_attempts/bash/shared.sh b/linux_os/guide/system/accounts/accounts-pam/display_login_attempts/bash/shared.sh
+index badc79bff8..a30d135e53 100644
+--- a/linux_os/guide/system/accounts/accounts-pam/display_login_attempts/bash/shared.sh
++++ b/linux_os/guide/system/accounts/accounts-pam/display_login_attempts/bash/shared.sh
+@@ -1,6 +1,6 @@
+-# platform = multi_platform_sle,Red Hat Virtualization 4,multi_platform_fedora,multi_platform_ol,multi_platform_rhel,multi_platform_ubuntu
++# platform = multi_platform_sle,Red Hat Virtualization 4,multi_platform_fedora,multi_platform_ol,multi_platform_rhel,multi_platform_ubuntu,multi_platform_wrlinux
+ 
+-{{%- if "sle" in product or "ubuntu" in product %}}
++{{%- if "sle" in product or "ubuntu" in product or "wrlinux" in product %}}
+ {{%- set pam_lastlog_path = "/etc/pam.d/login" %}}
+ {{%- set after_match = "^\s*session.*include\s+common-session$" %}}
+ {{%- else %}}
+@@ -10,7 +10,7 @@
+ 
+ {{%- if "ol" in product or "ubuntu" in product %}}
+ {{%- set control = "required" %}}
+-{{%- elif "sle" in product %}}
++{{%- elif "sle" in product or "wrlinux" in product %}}
+ {{%- set control = "optional" %}}
+ {{%- else %}}
+ {{%- set control = "\[default=1\]" %}}
+diff --git a/linux_os/guide/system/accounts/accounts-pam/display_login_attempts/oval/shared.xml b/linux_os/guide/system/accounts/accounts-pam/display_login_attempts/oval/shared.xml
+index a505a74d8c..9705d9ab36 100644
+--- a/linux_os/guide/system/accounts/accounts-pam/display_login_attempts/oval/shared.xml
++++ b/linux_os/guide/system/accounts/accounts-pam/display_login_attempts/oval/shared.xml
+@@ -1,4 +1,4 @@
+-{{%- if "sle" in product or "ubuntu" in product %}}
++{{%- if "sle" in product or "ubuntu" in product or "wrlinux" in product %}}
+ {{% set pam_lastlog_path = "/etc/pam.d/login" %}}
+ {{% else %}}
+ {{% set pam_lastlog_path = "/etc/pam.d/postlogin" %}}
+diff --git a/linux_os/guide/system/accounts/accounts-pam/display_login_attempts/rule.yml b/linux_os/guide/system/accounts/accounts-pam/display_login_attempts/rule.yml
+index d897045e3b..f7a0c55a0f 100644
+--- a/linux_os/guide/system/accounts/accounts-pam/display_login_attempts/rule.yml
++++ b/linux_os/guide/system/accounts/accounts-pam/display_login_attempts/rule.yml
+@@ -1,4 +1,4 @@
+-{{%- if "sle" in product or "ubuntu" in product %}}
++{{%- if "sle" in product or "ubuntu" in product or "wrlinux" in product %}}
+ {{%- set pam_lastlog_path = "/etc/pam.d/login" %}}
+ {{%- else %}}
+ {{%- set pam_lastlog_path = "/etc/pam.d/postlogin" %}}
+@@ -6,7 +6,7 @@
+ 
+ {{%- if "ol" in product or "ubuntu" in product %}}
+ {{%- set control = "required" %}}
+-{{%- elif "sle" in product %}}
++{{%- elif "sle" in product or "wrlinux" in product %}}
+ {{%- set control = "optional" %}}
+ {{%- else %}}
+ {{%- set control = "[default=1]" %}}
+-- 
+2.25.1
+

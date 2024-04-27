@@ -1,0 +1,25 @@
+From d24939e2dcc4f931d86fa194afe0f7583c5cfafb Mon Sep 17 00:00:00 2001
+From: Yi Zhao <yi.zhao@windriver.com>
+Date: Thu, 23 May 2024 20:46:54 +0800
+Subject: [PATCH] Enable rsyslog_remote_loghost rule
+
+Upstream-Status: Inappropriate [WRLinux specific]
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ .../rsyslog_remote_loghost/bash/shared.sh                       | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/linux_os/guide/system/logging/rsyslog_sending_messages/rsyslog_remote_loghost/bash/shared.sh b/linux_os/guide/system/logging/rsyslog_sending_messages/rsyslog_remote_loghost/bash/shared.sh
+index f2019bb9ad..d59288e340 100644
+--- a/linux_os/guide/system/logging/rsyslog_sending_messages/rsyslog_remote_loghost/bash/shared.sh
++++ b/linux_os/guide/system/logging/rsyslog_sending_messages/rsyslog_remote_loghost/bash/shared.sh
+@@ -1,4 +1,4 @@
+-# platform = Red Hat Virtualization 4,multi_platform_fedora,multi_platform_rhel,multi_platform_ol,multi_platform_ubuntu
++# platform = Red Hat Virtualization 4,multi_platform_fedora,multi_platform_rhel,multi_platform_ol,multi_platform_ubuntu,multi_platform_wrlinux
+ 
+ {{{ bash_instantiate_variables("rsyslog_remote_loghost_address") }}}
+ 
+-- 
+2.25.1
+

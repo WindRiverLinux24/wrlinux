@@ -1,0 +1,94 @@
+From 09eead08cd8b00b655747cb243e816546dd83706 Mon Sep 17 00:00:00 2001
+From: Yi Zhao <yi.zhao@windriver.com>
+Date: Thu, 27 Jan 2022 15:23:59 +0800
+Subject: [PATCH] Enable openssh rules for wrlinux
+
+Upstream-Status: Inappropriate [WRLinux specific]
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ .../services/ssh/package_openssh-server_installed/rule.yml    | 1 +
+ .../services/ssh/package_openssh-server_removed/rule.yml      | 1 +
+ linux_os/guide/services/ssh/service_sshd_disabled/rule.yml    | 1 +
+ linux_os/guide/services/ssh/service_sshd_enabled/rule.yml     | 1 +
+ .../ssh/ssh_server/sshd_set_idle_timeout/oval/shared.xml      | 2 +-
+ shared/checks/oval/sshd_version_higher_than_74.xml            | 4 ++++
+ 6 files changed, 9 insertions(+), 1 deletion(-)
+
+diff --git a/linux_os/guide/services/ssh/package_openssh-server_installed/rule.yml b/linux_os/guide/services/ssh/package_openssh-server_installed/rule.yml
+index 2fbdd219a1..4f1196e0f6 100644
+--- a/linux_os/guide/services/ssh/package_openssh-server_installed/rule.yml
++++ b/linux_os/guide/services/ssh/package_openssh-server_installed/rule.yml
+@@ -43,6 +43,7 @@ template:
+     name: package_installed
+     vars:
+         pkgname: openssh-server
++        pkgname@wrlinuxlts24: openssh-sshd
+ 
+ fixtext: |-
+     {{{ describe_package_install(package="openssh-server") }}}
+diff --git a/linux_os/guide/services/ssh/package_openssh-server_removed/rule.yml b/linux_os/guide/services/ssh/package_openssh-server_removed/rule.yml
+index 15f29deeee..fe3b5bf258 100644
+--- a/linux_os/guide/services/ssh/package_openssh-server_removed/rule.yml
++++ b/linux_os/guide/services/ssh/package_openssh-server_removed/rule.yml
+@@ -21,3 +21,4 @@ template:
+     name: package_removed
+     vars:
+         pkgname: openssh-server
++        pkgname@wrlinuxlts24: openssh-sshd
+diff --git a/linux_os/guide/services/ssh/service_sshd_disabled/rule.yml b/linux_os/guide/services/ssh/service_sshd_disabled/rule.yml
+index c58e3e993f..f3aca820cd 100644
+--- a/linux_os/guide/services/ssh/service_sshd_disabled/rule.yml
++++ b/linux_os/guide/services/ssh/service_sshd_disabled/rule.yml
+@@ -47,6 +47,7 @@ template:
+         packagename: openssh-server
+         packagename@opensuse: openssh
+         packagename@sle12: openssh
++        packagename@wrlinuxlts24: openssh-sshd
+         daemonname@debian10: ssh
+         daemonname@debian11: ssh
+         daemonname@ubuntu1604: ssh
+diff --git a/linux_os/guide/services/ssh/service_sshd_enabled/rule.yml b/linux_os/guide/services/ssh/service_sshd_enabled/rule.yml
+index 9d2f306d5f..e3aa3c1614 100644
+--- a/linux_os/guide/services/ssh/service_sshd_enabled/rule.yml
++++ b/linux_os/guide/services/ssh/service_sshd_enabled/rule.yml
+@@ -61,6 +61,7 @@ template:
+         packagename: openssh-server
+         packagename@sle12: openssh
+         packagename@sle15: openssh
++        packagename@wrlinuxlts24: openssh-sshd
+ 
+ fixtext: |-
+     {{{ fixtext_service_enabled("sshd") }}}
+diff --git a/linux_os/guide/services/ssh/ssh_server/sshd_set_idle_timeout/oval/shared.xml b/linux_os/guide/services/ssh/ssh_server/sshd_set_idle_timeout/oval/shared.xml
+index 916d7ea9a9..370edc0a81 100644
+--- a/linux_os/guide/services/ssh/ssh_server/sshd_set_idle_timeout/oval/shared.xml
++++ b/linux_os/guide/services/ssh/ssh_server/sshd_set_idle_timeout/oval/shared.xml
+@@ -33,7 +33,7 @@
+           test_ref="test_sshd_idle_timeout_config_dir" />
+           {{%- endif %}}
+         </criteria>
+-        {{%- if product not in ["ol8", "ol9", "rhel8", "rhel9"] %}}
++        {{%- if product not in ["ol8", "ol9", "rhel8", "rhel9"] and 'wrlinux' not in product %}}
+         <extend_definition comment="The SSH ClientAliveCountMax is set to zero" definition_ref="sshd_set_keepalive" />
+         {{% endif %}}
+       </criteria>
+diff --git a/shared/checks/oval/sshd_version_higher_than_74.xml b/shared/checks/oval/sshd_version_higher_than_74.xml
+index 0e598f8421..5f79606e40 100644
+--- a/shared/checks/oval/sshd_version_higher_than_74.xml
++++ b/shared/checks/oval/sshd_version_higher_than_74.xml
+@@ -19,7 +19,11 @@
+     <linux:state state_ref="state_openssh-server_version" />
+   </linux:rpminfo_test>
+   <linux:rpminfo_object id="obj_openssh-server_version" version="1">
++    {{%- if 'wrlinux' in product -%}}
++    <linux:name>openssh-sshd</linux:name>
++    {{%- else -%}}
+     <linux:name>openssh-server</linux:name>
++    {{%- endif -%}}
+   </linux:rpminfo_object>
+   <linux:rpminfo_state id="state_openssh-server_version" version="1">
+     <linux:evr datatype="evr_string" operation="greater than or equal">0:7.4</linux:evr>
+-- 
+2.25.1
+

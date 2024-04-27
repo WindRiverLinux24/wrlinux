@@ -1,0 +1,217 @@
+From 9738ad1137e253234081fb3d1eff9ba8e0025759 Mon Sep 17 00:00:00 2001
+From: Yi Zhao <yi.zhao@windriver.com>
+Date: Wed, 26 Jan 2022 16:00:55 +0800
+Subject: [PATCH] Enable audit-related rules
+
+Upstream-Status: Inappropriate [WRLinux specific]
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ .../audit_rules_sysadmin_actions/bash/shared.sh          | 3 ++-
+ .../audit_rules_usergroup_modification/bash/shared.sh    | 2 +-
+ .../bash/shared.sh                                       | 2 +-
+ .../auditd_audispd_disk_full_action/bash/shared.sh       | 2 +-
+ .../auditd_audispd_network_failure_action/bash/shared.sh | 3 ++-
+ .../bash/shared.sh                                       | 2 +-
+ .../auditd_data_retention_space_left/bash/shared.sh      | 2 +-
+ shared/checks/oval/audit_rules_auditctl.xml              | 9 +++++++--
+ shared/checks/oval/audit_rules_augenrules.xml            | 9 +++++++--
+ .../templates/audit_rules_dac_modification/bash.template | 3 ++-
+ .../audit_rules_file_deletion_events/bash.template       | 2 +-
+ shared/templates/audit_rules_login_events/bash.template  | 2 +-
+ .../audit_rules_privileged_commands/bash.template        | 4 ++--
+ .../audit_rules_privileged_commands/oval.template        | 2 +-
+ .../bash.template                                        | 2 +-
+ .../audit_rules_usergroup_modification/bash.template     | 2 +-
+ 16 files changed, 32 insertions(+), 19 deletions(-)
+
+diff --git a/linux_os/guide/auditing/auditd_configure_rules/audit_rules_sysadmin_actions/bash/shared.sh b/linux_os/guide/auditing/auditd_configure_rules/audit_rules_sysadmin_actions/bash/shared.sh
+index 027623091b..2f83f07d52 100644
+--- a/linux_os/guide/auditing/auditd_configure_rules/audit_rules_sysadmin_actions/bash/shared.sh
++++ b/linux_os/guide/auditing/auditd_configure_rules/audit_rules_sysadmin_actions/bash/shared.sh
+@@ -1,4 +1,5 @@
+-# platform = multi_platform_fedora,multi_platform_ol,multi_platform_rhel,multi_platform_rhv,multi_platform_sle,multi_platform_ubuntu,multi_platform_debian
++# platform = multi_platform_fedora,multi_platform_ol,multi_platform_rhel,multi_platform_rhv,multi_platform_sle,multi_platform_ubuntu,multi_platform_debian,multi_platform_wrlinux
++
+ 
+ # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+ 
+diff --git a/linux_os/guide/auditing/auditd_configure_rules/audit_rules_usergroup_modification/bash/shared.sh b/linux_os/guide/auditing/auditd_configure_rules/audit_rules_usergroup_modification/bash/shared.sh
+index 07965e2c7c..5f0e67160e 100644
+--- a/linux_os/guide/auditing/auditd_configure_rules/audit_rules_usergroup_modification/bash/shared.sh
++++ b/linux_os/guide/auditing/auditd_configure_rules/audit_rules_usergroup_modification/bash/shared.sh
+@@ -1,4 +1,4 @@
+-# platform = Red Hat Virtualization 4,multi_platform_ol,multi_platform_rhel,multi_platform_sle
++# platform = Red Hat Virtualization 4,multi_platform_ol,multi_platform_rhel,multi_platform_sle,multi_platform_wrlinux
+ 
+ # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+ {{{ bash_fix_audit_watch_rule("auditctl", "/etc/group", "wa", "audit_rules_usergroup_modification") }}}
+diff --git a/linux_os/guide/auditing/configure_auditd_data_retention/auditd_audispd_configure_remote_server/bash/shared.sh b/linux_os/guide/auditing/configure_auditd_data_retention/auditd_audispd_configure_remote_server/bash/shared.sh
+index 53a56e255d..f7e2f72821 100644
+--- a/linux_os/guide/auditing/configure_auditd_data_retention/auditd_audispd_configure_remote_server/bash/shared.sh
++++ b/linux_os/guide/auditing/configure_auditd_data_retention/auditd_audispd_configure_remote_server/bash/shared.sh
+@@ -1,4 +1,4 @@
+-# platform = Red Hat Virtualization 4,multi_platform_fedora,multi_platform_ol,multi_platform_rhel,multi_platform_sle,multi_platform_ubuntu
++# platform = Red Hat Virtualization 4,multi_platform_fedora,multi_platform_ol,multi_platform_rhel,multi_platform_sle,multi_platform_ubuntu,multi_platform_wrlinux
+ 
+ {{{ bash_instantiate_variables("var_audispd_remote_server") }}}
+ 
+diff --git a/linux_os/guide/auditing/configure_auditd_data_retention/auditd_audispd_disk_full_action/bash/shared.sh b/linux_os/guide/auditing/configure_auditd_data_retention/auditd_audispd_disk_full_action/bash/shared.sh
+index 36e7f8cda0..837d9cdbb9 100644
+--- a/linux_os/guide/auditing/configure_auditd_data_retention/auditd_audispd_disk_full_action/bash/shared.sh
++++ b/linux_os/guide/auditing/configure_auditd_data_retention/auditd_audispd_disk_full_action/bash/shared.sh
+@@ -1,4 +1,4 @@
+-# platform = Red Hat Virtualization 4,multi_platform_fedora,multi_platform_ol,multi_platform_rhel,multi_platform_sle,multi_platform_ubuntu
++# platform = Red Hat Virtualization 4,multi_platform_fedora,multi_platform_ol,multi_platform_rhel,multi_platform_sle,multi_platform_ubuntu,multi_platform_wrlinux
+ 
+ {{{ bash_instantiate_variables("var_audispd_disk_full_action") }}}
+ 
+diff --git a/linux_os/guide/auditing/configure_auditd_data_retention/auditd_audispd_network_failure_action/bash/shared.sh b/linux_os/guide/auditing/configure_auditd_data_retention/auditd_audispd_network_failure_action/bash/shared.sh
+index d1a5136005..5e512d4424 100644
+--- a/linux_os/guide/auditing/configure_auditd_data_retention/auditd_audispd_network_failure_action/bash/shared.sh
++++ b/linux_os/guide/auditing/configure_auditd_data_retention/auditd_audispd_network_failure_action/bash/shared.sh
+@@ -1,4 +1,5 @@
+-# platform = Red Hat Virtualization 4,multi_platform_fedora,multi_platform_ol,multi_platform_rhel,multi_platform_sle,multi_platform_ubuntu
++# platform = Red Hat Virtualization 4,multi_platform_fedora,multi_platform_ol,multi_platform_rhel,multi_platform_sle,multi_platform_ubuntu,multi_platform_wrlinux
++
+ 
+ {{{ bash_instantiate_variables("var_audispd_network_failure_action") }}}
+ 
+diff --git a/linux_os/guide/auditing/configure_auditd_data_retention/auditd_data_retention_admin_space_left_action/bash/shared.sh b/linux_os/guide/auditing/configure_auditd_data_retention/auditd_data_retention_admin_space_left_action/bash/shared.sh
+index f377a92ddf..29df5b4e9b 100644
+--- a/linux_os/guide/auditing/configure_auditd_data_retention/auditd_data_retention_admin_space_left_action/bash/shared.sh
++++ b/linux_os/guide/auditing/configure_auditd_data_retention/auditd_data_retention_admin_space_left_action/bash/shared.sh
+@@ -1,4 +1,4 @@
+-# platform = Red Hat Virtualization 4,multi_platform_fedora,multi_platform_ol,multi_platform_rhel,multi_platform_sle,multi_platform_ubuntu
++# platform = Red Hat Virtualization 4,multi_platform_fedora,multi_platform_ol,multi_platform_rhel,multi_platform_sle,multi_platform_ubuntu,multi_platform_wrlinux
+ 
+ {{{ bash_instantiate_variables("var_auditd_admin_space_left_action") }}}
+ 
+diff --git a/linux_os/guide/auditing/configure_auditd_data_retention/auditd_data_retention_space_left/bash/shared.sh b/linux_os/guide/auditing/configure_auditd_data_retention/auditd_data_retention_space_left/bash/shared.sh
+index a53f062b5d..60dcf414ff 100644
+--- a/linux_os/guide/auditing/configure_auditd_data_retention/auditd_data_retention_space_left/bash/shared.sh
++++ b/linux_os/guide/auditing/configure_auditd_data_retention/auditd_data_retention_space_left/bash/shared.sh
+@@ -1,4 +1,4 @@
+-# platform = Red Hat Virtualization 4,multi_platform_rhel,multi_platform_ol,multi_platform_sle,multi_platform_ubuntu
++# platform = Red Hat Virtualization 4,multi_platform_rhel,multi_platform_ol,multi_platform_sle,multi_platform_ubuntu,multi_platform_wrlinux
+ 
+ {{{ bash_instantiate_variables("var_auditd_space_left") }}}
+ 
+diff --git a/shared/checks/oval/audit_rules_auditctl.xml b/shared/checks/oval/audit_rules_auditctl.xml
+index 6300be5b33..2aff99cc4c 100644
+--- a/shared/checks/oval/audit_rules_auditctl.xml
++++ b/shared/checks/oval/audit_rules_auditctl.xml
+@@ -18,8 +18,13 @@
+     <ind:object object_ref="object_audit_rules_auditctl" />
+   </ind:textfilecontent54_test>
+   <ind:textfilecontent54_object id="object_audit_rules_auditctl" version="1">
+-    <ind:filepath>/usr/lib/systemd/system/auditd.service</ind:filepath>
+-    <ind:pattern operation="pattern match">^ExecStartPost=\-\/sbin\/auditctl.*$</ind:pattern>
++    {{% if 'wrlinux' in product %}}
++      <ind:filepath>/usr/lib/systemd/system/audit-rules.service</ind:filepath>
++	  <ind:pattern operation="pattern match">^ExecStart=\/usr\/sbin\/auditctl.*$</ind:pattern>
++    {{% else %}}
++      <ind:filepath>/usr/lib/systemd/system/auditd.service</ind:filepath>
++      <ind:pattern operation="pattern match">^ExecStartPost=\-\/sbin\/auditctl.*$</ind:pattern>
++    {{% endif %}}
+     <ind:instance datatype="int" operation="greater than or equal">1</ind:instance>
+   </ind:textfilecontent54_object>
+ 
+diff --git a/shared/checks/oval/audit_rules_augenrules.xml b/shared/checks/oval/audit_rules_augenrules.xml
+index fcb32c151a..07cb3a06e1 100644
+--- a/shared/checks/oval/audit_rules_augenrules.xml
++++ b/shared/checks/oval/audit_rules_augenrules.xml
+@@ -18,8 +18,13 @@
+     <ind:object object_ref="object_audit_rules_augenrules" />
+   </ind:textfilecontent54_test>
+   <ind:textfilecontent54_object id="object_audit_rules_augenrules" version="1">
+-    <ind:filepath>/usr/lib/systemd/system/auditd.service</ind:filepath>
+-    <ind:pattern operation="pattern match">^(ExecStartPost=\-\/sbin\/augenrules.*$|Requires=augenrules.service)</ind:pattern>
++    {{% if 'wrlinux' in product %}}
++      <ind:filepath>/usr/lib/systemd/system/audit-rules.service</ind:filepath>
++	  <ind:pattern operation="pattern match">^ExecStart=\/usr\/sbin\/augenrules.*$</ind:pattern>
++    {{% else %}}
++      <ind:filepath>/usr/lib/systemd/system/auditd.service</ind:filepath>
++      <ind:pattern operation="pattern match">^(ExecStartPost=\-\/sbin\/augenrules.*$|Requires=augenrules.service)</ind:pattern>
++    {{% endif %}}
+     <ind:instance datatype="int" operation="greater than or equal">1</ind:instance>
+   </ind:textfilecontent54_object>
+ 
+diff --git a/shared/templates/audit_rules_dac_modification/bash.template b/shared/templates/audit_rules_dac_modification/bash.template
+index daee702107..2969f33cd7 100644
+--- a/shared/templates/audit_rules_dac_modification/bash.template
++++ b/shared/templates/audit_rules_dac_modification/bash.template
+@@ -1,4 +1,5 @@
+-# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv,multi_platform_sle,multi_platform_ubuntu,multi_platform_debian
++# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv,multi_platform_sle,multi_platform_ubuntu,multi_platform_debian,multi_platform_wrlinux
++
+ 
+ # First perform the remediation of the syscall rule
+ # Retrieve hardware architecture of the underlying system
+diff --git a/shared/templates/audit_rules_file_deletion_events/bash.template b/shared/templates/audit_rules_file_deletion_events/bash.template
+index b3eab4edbb..8d5e9397fc 100644
+--- a/shared/templates/audit_rules_file_deletion_events/bash.template
++++ b/shared/templates/audit_rules_file_deletion_events/bash.template
+@@ -1,4 +1,4 @@
+-# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv,multi_platform_ubuntu,multi_platform_sle,multi_platform_debian
++# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv,multi_platform_ubuntu,multi_platform_sle,multi_platform_debian,multi_platform_wrlinux
+ 
+ # First perform the remediation of the syscall rule
+ # Retrieve hardware architecture of the underlying system
+diff --git a/shared/templates/audit_rules_login_events/bash.template b/shared/templates/audit_rules_login_events/bash.template
+index e3c55b43aa..f86383c4ba 100644
+--- a/shared/templates/audit_rules_login_events/bash.template
++++ b/shared/templates/audit_rules_login_events/bash.template
+@@ -1,4 +1,4 @@
+-# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv,multi_platform_sle,multi_platform_ubuntu,multi_platform_debian
++# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv,multi_platform_sle,multi_platform_ubuntu,multi_platform_debian,multi_platform_wrlinux
+ 
+ # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+ 
+diff --git a/shared/templates/audit_rules_privileged_commands/bash.template b/shared/templates/audit_rules_privileged_commands/bash.template
+index 63dfcb06cc..4aa45a76e0 100644
+--- a/shared/templates/audit_rules_privileged_commands/bash.template
++++ b/shared/templates/audit_rules_privileged_commands/bash.template
+@@ -1,7 +1,7 @@
+-{{%- if product in ["fedora", "ol7", "ol8", "ol9", "rhel7", "rhel8", "rhel9", "sle12", "sle15", "ubuntu2004", "ubuntu2204"] %}}
++{{%- if product in ["fedora", "ol7", "ol8", "ol9", "rhel7", "rhel8", "rhel9", "sle12", "sle15", "ubuntu2004", "ubuntu2204", "wrlinuxlts24"] %}}
+   {{%- set perm_x=" -F perm=x" %}}
+ {{%- endif %}}
+-# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv,multi_platform_sle,multi_platform_ubuntu
++# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv,multi_platform_sle,multi_platform_ubuntu,multi_platform_wrlinux
+ 
+ ACTION_ARCH_FILTERS="-a always,exit"
+ OTHER_FILTERS="-F path={{{ PATH }}}{{{ perm_x }}}"
+diff --git a/shared/templates/audit_rules_privileged_commands/oval.template b/shared/templates/audit_rules_privileged_commands/oval.template
+index 7ef67818cb..a1037440db 100644
+--- a/shared/templates/audit_rules_privileged_commands/oval.template
++++ b/shared/templates/audit_rules_privileged_commands/oval.template
+@@ -1,4 +1,4 @@
+-{{%- if product in ["fedora", "ol7", "ol8", "ol9", "rhel7", "rhel8", "rhel9", "sle12", "sle15", "ubuntu2004", "ubuntu2204"] %}}
++{{%- if product in ["fedora", "ol7", "ol8", "ol9", "rhel7", "rhel8", "rhel9", "sle12", "sle15", "ubuntu2004", "ubuntu2204", "wrlinuxlts24"] %}}
+   {{%- set perm_x="(?:[\s]+-F[\s]+perm=x)" %}}
+ {{%- endif %}}
+ <def-group>
+diff --git a/shared/templates/audit_rules_unsuccessful_file_modification/bash.template b/shared/templates/audit_rules_unsuccessful_file_modification/bash.template
+index b18223c98a..a9dfd9769f 100644
+--- a/shared/templates/audit_rules_unsuccessful_file_modification/bash.template
++++ b/shared/templates/audit_rules_unsuccessful_file_modification/bash.template
+@@ -1,4 +1,4 @@
+-# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv,multi_platform_sle,multi_platform_ubuntu,multi_platform_debian
++# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv,multi_platform_sle,multi_platform_ubuntu,multi_platform_debian,multi_platform_wrlinux
+ 
+ # First perform the remediation of the syscall rule
+ # Retrieve hardware architecture of the underlying system
+diff --git a/shared/templates/audit_rules_usergroup_modification/bash.template b/shared/templates/audit_rules_usergroup_modification/bash.template
+index 62faac341c..7d4daad93c 100644
+--- a/shared/templates/audit_rules_usergroup_modification/bash.template
++++ b/shared/templates/audit_rules_usergroup_modification/bash.template
+@@ -1,4 +1,4 @@
+-# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv,multi_platform_sle,multi_platform_ubuntu
++# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv,multi_platform_sle,multi_platform_ubuntu,multi_platform_wrlinux
+ 
+ # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+ 
+-- 
+2.25.1
+
