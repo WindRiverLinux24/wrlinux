@@ -4,7 +4,7 @@ Limitation
    is i.86|x86_64
    (Set MACHINE = "qemux86-64|qemux86|intel-x86-64" in the build)
 
-2) The target installer based on fedora 37, so it requires:
+2) The target installer based on fedora 39, so it requires:
    - systemd as init manager
    - python3
    - dnf2/rpm4 package management
@@ -24,9 +24,9 @@ Building the target installer
 
    For installer image, you are not supposed to change the 'DISTRO'
    setting in target build directory. It may work, but it's not
-   recommended. Instead we should recommend the user run a
-   oe-init-build-env and create a new build directory for the installer.
-   Set DISTRO = 'wrlinux-installer' in local.conf file.
+   recommended. Instead we recommend user to run `source oe-init-build-env`
+   and create a new build directory for the installer.
+   Then set `DISTRO = 'wrlinux-installer'` in local.conf file.
 
    There are two kinds of installer builds: "Image Based Install" and
    "Package Based Install". The former is to install a prebuilt image,
@@ -37,11 +37,11 @@ Building the target installer
    or ext4 image file, then the installer will copy this image to the
    target.
 
-   For Package Based Install,  set INSTALLER_TARGET_BUILD =
+   For Package Based Install, set INSTALLER_TARGET_BUILD =
    '<target-build-topdir>' to specify the path to target build directory
-   that will supply RPMs, and INSTALLER_TARGET_IMAGE = '<target-image-pn>'
+   which will supply RPMs, and INSTALLER_TARGET_IMAGE = '<target-image-pn>'
    to specify the image recipe name, then the installer will install its
-   RPMs to the target;
+   RPMs to the target.
 
 2. Two main use cases
    2.1 Installer image with ext2, ext3 or ext4 image from the target
@@ -120,7 +120,7 @@ Building the target installer
        $ ./tmp-glibc/sysroots/x86_64/usr/bin/qemu-img create -f qcow hd0.vdisk 5000M
 
        Start qemu with installer image:
-       $ runqemu qemux86-64 wrlinux-image-installer iso slirp qemuparams="-drive file=hd0.vdisk,if=virtio,format=qcow"
+       $ runqemu qemux86-64 wrlinux-image-installer iso slirp kvm qemuparams="-drive file=hd0.vdisk,if=virtio,format=qcow"
 
        Add "-vnc :4" to qemuparams to start a VNC capable session.
        Add "-m 1024" to qemuparams to allocate enough memory.
@@ -129,13 +129,16 @@ Building the target installer
        but does not work with host kernel Linux 3.17.
 
        Start qemu with installed target:
-       $ runqemu qemux86-64 wrlinux-image-installer iso slirp qemuparams="-drive file=hd0.vdisk,if=virtio,format=qcow -boot menu=on"
+       $ runqemu qemux86-64 wrlinux-image-installer iso slirp kvm qemuparams="-drive file=hd0.vdisk,if=virtio,format=qcow -boot menu=on"
 
        Run vncviewer to connect VNC capable session.
        $ vncviewer <host-ip-address>:4
 
        Add "-boot menu=on" to qemuparams and run vncviewer to connect,
        press ESC key, manually choose "2. Virtio disk" "to boot from hard disk.
+
+       Add kvm to runqemu could speed up the installation, if add failed, please refer
+       https://wiki.yoctoproject.org/wiki/How_to_enable_KVM_for_Poky_qemu
 
    4.3 Use virtualbox for testing
        4.3.1 Prepare virtualbox
@@ -190,11 +193,11 @@ Building the target installer
 
 5. Use custom installer.conf
    The second build can use installer.conf to help speed up the build
-   process when package based installs, the user can set WRL_INSTALLER_CONF
+   process when package based installs, the user can set INSTALLER_CONF
    in the conf file, for example:
 
    edit local.conf
-   WRL_INSTALLER_CONF = "/my/installer.conf"
+   INSTALLER_CONF = "/my/installer.conf"
 
    You can customize the contents of installer.conf when needed, for example,
    add packages that you will like to install, but if you do, you must ensure
@@ -252,15 +255,14 @@ Building the target installer
        NOTE: You need to use a proper name for the target build project
              since its basename will be used in the selection menus.
 
-       NOTE: The number of the entries in WRL_INSTALLER_CONF or
-             KICKSTART_FILE must be the same as the number of target build
-             projects.
-             For example, if you want to use WRL_INSTALLER_CONF or
+       NOTE: The number of the entries in INSTALLER_CONF or KICKSTART_FILE
+             must be the same as the number of target build projects.
+             For example, if you want to use INSTALLER_CONF or
              KICKSTART_FILE for target_build1, target_build2 and
              target_build3, set each of the three in the conf file.
 
-             WRL_INSTALLER_CONF = "/my/target1.conf /my/target2.conf \
-                                    /my/target3.conf"
+             INSTALLER_CONF = "/my/target1.conf /my/target2.conf \
+                               /my/target3.conf"
              KICKSTART_FILE = "/my/target1.ks /my/target2.ks \
                                /my/target3.ks"
 
@@ -388,7 +390,7 @@ Building the target installer
 
 License
 -------
-Copyright (C) 2013-2023 Wind River Systems, Inc.
+Copyright (C) 2013-2024 Wind River Systems, Inc.
 
 Source code included in the tree for individual recipes is under the LICENSE
 stated in the associated recipe (.bb file) unless otherwise stated.
