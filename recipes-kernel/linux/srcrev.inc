@@ -77,7 +77,7 @@ SRCREV_machine:kb-v6.6-standard-sdkv6.6-xlnx-soc ?= "11c71a59d58394a19fb44231e0d
 LINUX_VERSION:kb-v6.6-standard-sdkv6.6-xlnx-soc = "6.6.52"
 SRCREV_machine:kb-v6.6-standard-ti-am335x ?= "01b1f32be4b0eb108c00b16ec4eef29ce7fa9546"
 LINUX_VERSION:kb-v6.6-standard-ti-am335x = "6.6.52"
-SRCREV_machine:kb-v6.6-standard-ti-sdk-6.6-ti-soc ?= "c6df180c906e7167d6204194435bc58c374a4abd"
+SRCREV_machine:kb-v6.6-standard-ti-sdk-6.6-ti-soc ?= "7f86555dc8e95a41f0bfa10331f317e7dba6d012"
 LINUX_VERSION:kb-v6.6-standard-ti-sdk-6.6-ti-soc = "6.6.52"
 SRCREV_machine:kb-v6.6-standard-tiny-arm-versatile-926ejs ?= "cc86fa0f4aed4a773016b6f71b72cc1ef87e5194"
 LINUX_VERSION:kb-v6.6-standard-tiny-arm-versatile-926ejs = "6.6.52"
@@ -94,4 +94,4 @@ LINUX_VERSION:kb-v6.6-standard-xilinx-zynqmp = "6.6.52"
 
 # yocto-kernel-cache entries
 KERNEL_CACHE_BRANCH_6.6 = "yocto-6.6"
-SRCREV_meta_6.6 = "5cefbe3e2770576771fe59b611d3b5fcf5860a1f"
+SRCREV_meta_6.6 = "dc93ca87c4710ed799c8d45c8867c58685e88ecd"
