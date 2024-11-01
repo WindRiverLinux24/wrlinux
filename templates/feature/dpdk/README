@@ -170,9 +170,9 @@ Take the l2fwd as example:
 	# mount -t hugetlbfs none /mnt/hugepages
  <3>. Run the layer 2 forwarding application:
 	For ls1043 platform
-	# /usr/share/dpdk/examples/dpdk-l2fwd -c 0x2 -n 1 -- -p 0x1 -q 1 -T 0
+	# /usr/bin/dpdk-l2fwd -c 0x2 -n 1 -- -p 0x1 -q 1 -T 0
 	For ls1046 platform
-	# /usr/share/dpdk/examples/dpdk-l2fwd -c 0x2 -n 1 -- -p 0x1 -q 1 -T 0 -b 7
+	# /usr/bin/dpdk-l2fwd -c 0x2 -n 1 -- -p 0x1 -q 1 -T 0 -b 7
 
 4.1.2.2 DPDK on ENETC
 ---------------------
@@ -189,7 +189,7 @@ Take the l2fwd as example:
 	# ./dpdk_configure_1028ardb.sh
 
  <2>. Run the layer 2 forwarding application:
-	# /usr/share/dpdk/examples/dpdk-l2fwd -c 0x2 -n 1 -- -p 0x1 -q 1 -T 0
+	# /usr/bin/dpdk-l2fwd -c 0x2 -n 1 -- -p 0x1 -q 1 -T 0
 
 Note: Please deploy a PCIe NIC on board if you intent to use NFS rootfs, because all
       the network interfaces are assigned to user space applications.
@@ -206,7 +206,7 @@ Take the l2fwd as example:
      dynamic_dpl.sh command:
 	 # export DPRC=dprc.2
   3. Run the layer 2 forwarding application:
-	 # /usr/share/dpdk/examples/dpdk-l2fwd -c 0x3 -n 1 --file-prefix=p1 --socket-mem=1024 -- -p 0x3 -q 1
+	 # /usr/bin/dpdk-l2fwd -c 0x3 -n 1 --file-prefix=p1 --socket-mem=1024 -- -p 0x3 -q 1
 
 5. DPDK compilation with optimization
 =====================================
