@@ -41,7 +41,7 @@ SRCREV_machine:kb-v6.6-standard-nxp-ls20xx ?= "c0b4a8f13b976065abdeaa2f1177dbc5c
 LINUX_VERSION:kb-v6.6-standard-nxp-ls20xx = "6.6.62"
 SRCREV_machine:kb-v6.6-standard-nxp-sdk-6.6-nxp-s32g ?= "3b8bd046eb2b869b93db84c0449f177944b8b0f6"
 LINUX_VERSION:kb-v6.6-standard-nxp-sdk-6.6-nxp-s32g = "6.6.62"
-SRCREV_machine:kb-v6.6-standard-nxp-sdk-6.6-nxp-soc ?= "f273a5326882f318d25ab57af011f74ef90e4ad8"
+SRCREV_machine:kb-v6.6-standard-nxp-sdk-6.6-nxp-soc ?= "7c627c0de4d1c676703bc31d90754140d6def9d5"
 LINUX_VERSION:kb-v6.6-standard-nxp-sdk-6.6-nxp-soc = "6.6.62"
 SRCREV_machine:kb-v6.6-standard-preempt-rt-arm-versatile-926ejs ?= "5dd9b152258860d2915678f8e38615e0acbd598d"
 LINUX_VERSION:kb-v6.6-standard-preempt-rt-arm-versatile-926ejs = "6.6.62"
@@ -94,4 +94,4 @@ LINUX_VERSION:kb-v6.6-standard-xilinx-zynqmp = "6.6.62"
 
 # yocto-kernel-cache entries
 KERNEL_CACHE_BRANCH_6.6 = "yocto-6.6"
-SRCREV_meta_6.6 = "73d4416a673ca4c619121ac6138569ff5d664ecb"
+SRCREV_meta_6.6 = "8cda7c0eb6978af45b1f41e17f325056536c1d53"
