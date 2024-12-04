@@ -166,8 +166,8 @@ SANITY_TESTED_DISTROS ?= " \
             ubuntu-20.04 \n \
             ubuntu-22.04 \n \
             ubuntu-24.04 \n \
-            fedora-39 \n \
             fedora-40 \n \
+            fedora-41 \n \
             opensuseleap-15.5 \n \
             rhel-8.10 \n \
             rhel-9.4 \n \
