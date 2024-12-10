@@ -89,9 +89,9 @@ SRCREV_machine:kb-v6.6-standard-tiny-x86 ?= "6ae9eb480f36462d25b89758e541d6298f6
 LINUX_VERSION:kb-v6.6-standard-tiny-x86 = "6.6.64"
 SRCREV_machine:kb-v6.6-standard-x86 ?= "2b8201204caa17a800e04bc04fe3dae0847c94ff"
 LINUX_VERSION:kb-v6.6-standard-x86 = "6.6.64"
-SRCREV_machine:kb-v6.6-standard-xilinx-zynqmp ?= "6ae9eb480f36462d25b89758e541d6298f607a5b"
+SRCREV_machine:kb-v6.6-standard-xilinx-zynqmp ?= "9766a0fc1a6bf69afd0f06e0a9de0db6e1601c0a"
 LINUX_VERSION:kb-v6.6-standard-xilinx-zynqmp = "6.6.64"
 
 # yocto-kernel-cache entries
 KERNEL_CACHE_BRANCH_6.6 = "yocto-6.6"
-SRCREV_meta_6.6 = "ff64121c498bd9a8ead8b08663da323e3e103179"
+SRCREV_meta_6.6 = "693358ea6816821663168ac9063d60e52a8ee4fe"
