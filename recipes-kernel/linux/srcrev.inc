@@ -41,7 +41,7 @@ SRCREV_machine:kb-v6.6-standard-nxp-ls20xx ?= "6ae9eb480f36462d25b89758e541d6298
 LINUX_VERSION:kb-v6.6-standard-nxp-ls20xx = "6.6.64"
 SRCREV_machine:kb-v6.6-standard-nxp-sdk-6.6-nxp-s32g ?= "8abaa29b74ee4aa68e0096f6918e04b8dd0bf029"
 LINUX_VERSION:kb-v6.6-standard-nxp-sdk-6.6-nxp-s32g = "6.6.64"
-SRCREV_machine:kb-v6.6-standard-nxp-sdk-6.6-nxp-soc ?= "a3e00d5992231270ac229ffa281bc2485cce4019"
+SRCREV_machine:kb-v6.6-standard-nxp-sdk-6.6-nxp-soc ?= "1446a4f922eeebb76f4a9886d104b8db717d5c7a"
 LINUX_VERSION:kb-v6.6-standard-nxp-sdk-6.6-nxp-soc = "6.6.64"
 SRCREV_machine:kb-v6.6-standard-preempt-rt-arm-versatile-926ejs ?= "87c964e66788c5251ba8c3fa16f2c1e50e0836ad"
 LINUX_VERSION:kb-v6.6-standard-preempt-rt-arm-versatile-926ejs = "6.6.64"
@@ -57,7 +57,7 @@ SRCREV_machine:kb-v6.6-standard-preempt-rt-microchip-polarfire-soc ?= "44273eb0e
 LINUX_VERSION:kb-v6.6-standard-preempt-rt-microchip-polarfire-soc = "6.6.64"
 SRCREV_machine:kb-v6.6-standard-preempt-rt-nxp-sdk-6.6-nxp-s32g ?= "e4c023da8e6f70668f04414c8b112029f1b97725"
 LINUX_VERSION:kb-v6.6-standard-preempt-rt-nxp-sdk-6.6-nxp-s32g = "6.6.64"
-SRCREV_machine:kb-v6.6-standard-preempt-rt-nxp-sdk-6.6-nxp-soc ?= "2af401a716d0ca67bfb2f401f717b2d62637f3f7"
+SRCREV_machine:kb-v6.6-standard-preempt-rt-nxp-sdk-6.6-nxp-soc ?= "0b3505bd336d3218f83855c984af738701404e75"
 LINUX_VERSION:kb-v6.6-standard-preempt-rt-nxp-sdk-6.6-nxp-soc = "6.6.64"
 SRCREV_machine:kb-v6.6-standard-preempt-rt-sdkv5.15-axxia ?= "7ce07846d1a3bcc30514f9edff461a62d37f5159"
 LINUX_VERSION:kb-v6.6-standard-preempt-rt-sdkv5.15-axxia = "6.6.64"
@@ -89,7 +89,7 @@ SRCREV_machine:kb-v6.6-standard-tiny-x86 ?= "6ae9eb480f36462d25b89758e541d6298f6
 LINUX_VERSION:kb-v6.6-standard-tiny-x86 = "6.6.64"
 SRCREV_machine:kb-v6.6-standard-x86 ?= "2b8201204caa17a800e04bc04fe3dae0847c94ff"
 LINUX_VERSION:kb-v6.6-standard-x86 = "6.6.64"
-SRCREV_machine:kb-v6.6-standard-xilinx-zynqmp ?= "9766a0fc1a6bf69afd0f06e0a9de0db6e1601c0a"
+SRCREV_machine:kb-v6.6-standard-xilinx-zynqmp ?= "34172d7437216f65b194771419b6748ccaad4de8"
 LINUX_VERSION:kb-v6.6-standard-xilinx-zynqmp = "6.6.64"
 
 # yocto-kernel-cache entries
