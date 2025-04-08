@@ -5,3 +5,10 @@
 SSTATE_EXCLUDEDEPS_SYSROOT:append:amd-x86 = " \
     .*->.*llvm.* \
 "
+# intel-x86 enabled the llvmpipe in mesa driver
+# llvm will be dependencies when gallium-llvm set
+# and not provide the toolchain for build
+# so remove llvm from sysroot
+SSTATE_EXCLUDEDEPS_SYSROOT:append:intel-x86 = " \
+    .*->.*llvm.* \
+"
