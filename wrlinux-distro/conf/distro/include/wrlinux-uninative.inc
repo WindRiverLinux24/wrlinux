@@ -24,3 +24,6 @@ require ${YOCTO_UNINATIVE_INC}
 # by checksum, so that we will get errors when it is updated.
 #
 UNINATIVE_URL = "file://${LAYER_PATH_wrlinux}/files/uninative-tarballs/${@d.getVarFlag('UNINATIVE_CHECKSUM', '${BUILD_ARCH}')}/"
+
+# Set for SPDX 3
+SPDX_AUTHORS_openembedded_comment ??= "${DISTRO_NAME} ${DISTRO_VERSION}"
